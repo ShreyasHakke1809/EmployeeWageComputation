@@ -10,10 +10,7 @@ namespace EmployeeWageComputation
     {
         const int FULL_TIME = 1;
         const int PART_TIME = 2;
-        const int EMP_RATE_PER_HR = 20;
-        const int NUMBER_OF_WORKING_DAYS = 20;
-        const int MAX_WORKING_DAYS = 100;
-        public void ComputeWage()
+        public static int ComputeWage(string company , int EMP_RATE_PER_HR , int NUMBER_OF_WORKING_DAYS , int MAX_WORKING_DAYS)
         {
             int empHrs = 0;
             int empWage = 0;
@@ -43,7 +40,10 @@ namespace EmployeeWageComputation
                 day++;
                 totalWorkingHrs = totalWorkingHrs + empHrs;
             }
-            Console.WriteLine("Total Wage for {0} days is:{1}", (day - 1), totalWage);
+            
+                
+            Console.WriteLine("Total Wage for {0} {1} days and Hrs {2} is {3}", company ,(day - 1),totalWorkingHrs , totalWage);
+            return empHrs;
         }
     }
 }
