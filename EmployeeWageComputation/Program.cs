@@ -6,8 +6,10 @@ namespace EmployeeWageComputation
     {
         static void Main(string[] args)
         {
-            EmployeeWage.ComputeWage("Deloitt", 20, 15, 100);
-            EmployeeWage.ComputeWage("Infosys", 25, 20, 105);
+            EmployeeWage employeeWage = new EmployeeWage("Deloitt", 20, 15, 100);
+            employeeWage.ComputeWage();
+            EmployeeWage employeeWage1 = new EmployeeWage("Infosys", 25, 20, 105);
+            employeeWage1.ComputeWage();
         }
     }    
 }
