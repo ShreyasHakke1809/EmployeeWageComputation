@@ -8,18 +8,26 @@ namespace EmployeeWageComputation
 {
     internal class EmployeeWage
     {
-        string company;
-        int empRatePerHr,numberOfWorkingDays,maxWorkingDays;
-
-        public EmployeeWage(string companyName,int ratePerHr,int workingDays,int maxDays)
+        Company[] companies = new Company[5];
+        public int numberOfCompany = 0;
+        public void AddCompanyObjectsInArray(string companyName, int ratePerHr, int workingDays, int maxDays)
         {
-            company=companyName;
-            empRatePerHr = ratePerHr;
-            numberOfWorkingDays = workingDays;
-            maxWorkingDays = maxDays;
+            Company obj = new Company(companyName,ratePerHr,workingDays,maxDays);
+            companies[numberOfCompany] = obj;
+            numberOfCompany++;
         }
-        
-        public void ComputeWage()
+        public void IterateOverArray()
+        {
+            foreach (Company comp in companies) 
+            {
+                if (comp != null)
+                {
+                    int totalWage = ComputeWage(comp);
+                    comp.SetTotalWage(totalWage);
+                }
+            }
+        }
+        public int ComputeWage(Company company)
         {
             const int FULL_TIME = 1;
             const int PART_TIME = 2;
@@ -28,9 +36,8 @@ namespace EmployeeWageComputation
             int totalWage = 0;
             int day = 1;
             int totalWorkingHrs = 0;
-            Console.WriteLine("Welcome To Employee Wage Computation");
             Random random = new Random();
-            while (day <= numberOfWorkingDays && totalWorkingHrs <= maxWorkingDays)
+            while (day <= company.numberOfWorkingDays && totalWorkingHrs <= company.maxWorkingDays)
             {
                 int employeeInput = random.Next(0, 3);
                 switch (employeeInput)
@@ -45,15 +52,18 @@ namespace EmployeeWageComputation
                         empHrs = 0;
                         break;
                 }
-                empWage = empHrs * empRatePerHr;
+                empWage = empHrs * company.empRatePerHr;
                 totalWage = totalWage + empWage;
-                Console.WriteLine("Day{0} employee wage is:{1}", day, empWage);
+               // Console.WriteLine("Day{0} employee wage is:{1}", day, empWage);
                 day++;
                 totalWorkingHrs = totalWorkingHrs + empHrs;
+                if (totalWorkingHrs > company.maxWorkingDays)
+                    totalWorkingHrs = totalWorkingHrs - empHrs;
             }
             
                 
-            Console.WriteLine("Total Wage for {0} {1} days and Hrs {2} is {3}", company ,(day - 1),totalWorkingHrs , totalWage);
+            Console.WriteLine("Total Wage for {0} {1} days and Hrs {2} is {3}", company.companyN , (day - 1), totalWorkingHrs , totalWage);
+            return totalWage;
             
         }
     }
