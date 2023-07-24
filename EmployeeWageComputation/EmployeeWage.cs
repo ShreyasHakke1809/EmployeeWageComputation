@@ -8,23 +8,25 @@ namespace EmployeeWageComputation
 {
     internal class EmployeeWage
     {
-        Company[] companies = new Company[5];
-        public int numberOfCompany = 0;
-        public void AddCompanyObjectsInArray(string companyName, int ratePerHr, int workingDays, int maxDays)
+        public List<Company> companyEmpWageList;
+
+        public static Random random = new Random();
+
+        public EmployeeWage()
         {
-            Company obj = new Company(companyName,ratePerHr,workingDays,maxDays);
-            companies[numberOfCompany] = obj;
-            numberOfCompany++;
+            companyEmpWageList = new List<Company>();
         }
-        public void IterateOverArray()
+        public void AddCompanyEmpWageToList(string company, int emp_Wage_Per_Hr, int working_Days_Per_Month, int max_Hrs_Per_Month)
         {
-            foreach (Company comp in companies) 
+            Company companyEmpWage = new Company(company, emp_Wage_Per_Hr, working_Days_Per_Month, max_Hrs_Per_Month);
+            companyEmpWageList.Add(companyEmpWage);
+        }
+        public void ComputeEmpWage()
+        {
+            foreach (Company empWage in companyEmpWageList)
             {
-                if (comp != null)
-                {
-                    int totalWage = ComputeWage(comp);
-                    comp.SetTotalWage(totalWage);
-                }
+                empWage.SetTotalWage(ComputeWage(empWage));
+                Console.WriteLine(empWage.ToString());
             }
         }
         public int ComputeWage(Company company)

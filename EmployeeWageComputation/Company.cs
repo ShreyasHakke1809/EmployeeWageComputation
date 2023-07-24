@@ -22,5 +22,9 @@ namespace EmployeeWageComputation
         {
             totalWage = total;
         }
+        public override string ToString()
+        {
+            return "Total Employee Wage for company: " + companyN + " is: " + totalWage + "\n";
+        }
     }
 }

@@ -8,9 +8,9 @@ namespace EmployeeWageComputation
         {
             Console.WriteLine("Welcome To Employee Wage Computation");
             EmployeeWage employeeWage = new EmployeeWage();
-            employeeWage.AddCompanyObjectsInArray("Deloitt", 20, 15, 100);
-            employeeWage.AddCompanyObjectsInArray("Microsoft", 25, 20, 105);
-            employeeWage.IterateOverArray();
+            employeeWage.AddCompanyEmpWageToList("Deloitt", 20, 15, 100);
+            employeeWage.AddCompanyEmpWageToList("Microsoft", 25, 20, 105);
+            employeeWage.ComputeEmpWage();
         }
     }    
 }
