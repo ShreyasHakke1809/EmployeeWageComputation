@@ -11,6 +11,7 @@ namespace EmployeeWageComputation
             employeeWage.AddCompanyEmpWageToList("Deloitt", 20, 15, 100);
             employeeWage.AddCompanyEmpWageToList("Microsoft", 25, 20, 105);
             employeeWage.ComputeEmpWage();
-        }
+            Console.WriteLine("\nTotal wage is" + employeeWage.GetTotalWageBasedOnCompany("Microsoft"));
+        } 
     }    
 }

@@ -9,22 +9,30 @@ namespace EmployeeWageComputation
     internal class EmployeeWage
     {
         public List<Company> companyEmpWageList;
+        public Dictionary<string, int> keyValue;
         public EmployeeWage()
         {
             companyEmpWageList = new List<Company>();
+            keyValue = new Dictionary<string, int>();
         }
         public void AddCompanyEmpWageToList(string company, int emp_Wage_Per_Hr, int working_Days_Per_Month, int max_Hrs_Per_Month)
         {
             Company companyEmpWage = new Company(company, emp_Wage_Per_Hr, working_Days_Per_Month, max_Hrs_Per_Month);
-            companyEmpWageList.Add(companyEmpWage);
+            companyEmpWageList.Add(companyEmpWage);         
         }
         public void ComputeEmpWage()
         {
-            foreach (Company empWage in companyEmpWageList)
+            foreach (Company comp in companyEmpWageList)
             {
-                empWage.SetTotalWage(ComputeWage(empWage));
-                Console.WriteLine(empWage.ToString());
+                int totalWage = ComputeWage(comp);
+                comp.SetTotalWage(totalWage);
+                Console.Write(comp);
+                keyValue.Add(comp.companyN, comp.totalWage);
             }
+        }
+        public int GetTotalWageBasedOnCompany(string companyN)
+        {
+            return keyValue[companyN];
         }
         public int ComputeWage(Company company)
         {
@@ -66,9 +74,9 @@ namespace EmployeeWageComputation
             {
                   Console.Write(wage+" ");
             }
-
-           // Console.WriteLine("Total Wage for {0} {1} days and Hrs {2} is {3}", company.companyN , (day - 1), totalWorkingHrs , totalWage);
-            return totalWage;
+            Console.WriteLine("Total Days: {0}, Total working hours: {1} ", (day-1),empHrs);
+            Console.WriteLine("Total Employee Wage for company " + company.companyN + " is: " + company.totalWage + "\n");
+            return company.totalWage;
             
         }
     }
