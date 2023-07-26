@@ -9,9 +9,6 @@ namespace EmployeeWageComputation
     internal class EmployeeWage
     {
         public List<Company> companyEmpWageList;
-
-        public static Random random = new Random();
-
         public EmployeeWage()
         {
             companyEmpWageList = new List<Company>();
@@ -38,6 +35,7 @@ namespace EmployeeWageComputation
             int totalWage = 0;
             int day = 1;
             int totalWorkingHrs = 0;
+            List<int> listofDailyWages = new List<int>();         
             Random random = new Random();
             while (day <= company.numberOfWorkingDays && totalWorkingHrs <= company.maxWorkingDays)
             {
@@ -55,16 +53,21 @@ namespace EmployeeWageComputation
                         break;
                 }
                 empWage = empHrs * company.empRatePerHr;
+                listofDailyWages.Add(empWage);
                 totalWage = totalWage + empWage;
-               // Console.WriteLine("Day{0} employee wage is:{1}", day, empWage);
+                Console.WriteLine("Day{0} employee wage is:{1}", day, empWage);
                 day++;
                 totalWorkingHrs = totalWorkingHrs + empHrs;
                 if (totalWorkingHrs > company.maxWorkingDays)
                     totalWorkingHrs = totalWorkingHrs - empHrs;
             }
-            
-                
-            Console.WriteLine("Total Wage for {0} {1} days and Hrs {2} is {3}", company.companyN , (day - 1), totalWorkingHrs , totalWage);
+            Console.WriteLine("\nDaily wage for {0} is:",company.companyN);
+            foreach (int wage in listofDailyWages)
+            {
+                  Console.Write(wage+" ");
+            }
+
+           // Console.WriteLine("Total Wage for {0} {1} days and Hrs {2} is {3}", company.companyN , (day - 1), totalWorkingHrs , totalWage);
             return totalWage;
             
         }
